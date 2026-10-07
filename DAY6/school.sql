@@ -34,26 +34,40 @@ INSERT INTO enrolments (student_id, course_id, grade) VALUES
 (2, 1, 'B'),
 (2, 3, 'A'),
 (3, 2, 'A');
-SELECT students.name AS student, courses.name AS course, enrolments.grade
+
+-- Query 1
+SELECT students.name AS student,
+       courses.name AS course,
+       enrolments.grade
 FROM enrolments
 JOIN students ON enrolments.student_id = students.id
 JOIN courses ON enrolments.course_id = courses.id;
-SELECT courses.name AS course, COUNT(enrolments.student_id) AS student_count
+
+-- Query 2
+SELECT courses.name AS course,
+       COUNT(enrolments.student_id) AS student_count
 FROM courses
 LEFT JOIN enrolments ON courses.id = enrolments.course_id
 GROUP BY courses.id, courses.name;
-SELECT students.name AS student, COUNT(enrolments.course_id) AS course_count
+
+-- Query 3
+SELECT students.name AS student,
+       COUNT(enrolments.course_id) AS course_count
 FROM students
 LEFT JOIN enrolments ON students.id = enrolments.student_id
 GROUP BY students.id, students.name;
-SELECT students.name AS student, courses.name AS course
+
+-- Query 4
+SELECT students.name AS student,
+       courses.name AS course
 FROM enrolments
 JOIN students ON enrolments.student_id = students.id
 JOIN courses ON enrolments.course_id = courses.id
 WHERE enrolments.grade = 'A';
+
+-- Query 5
 SELECT courses.name AS course,
-       COUNT(enrolments.student_id) AS total_students,
-       SUM(CASE WHEN enrolments.grade = 'A' THEN 1 ELSE 0 END) AS grade_A
+       COUNT(enrolments.student_id) AS total_students
 FROM courses
 LEFT JOIN enrolments ON courses.id = enrolments.course_id
 GROUP BY courses.id, courses.name;

@@ -1,0 +1,7 @@
+# Reflection
+
+The most difficult concept for me was concurrency: how a system stops two people from doing the same thing at the same moment. Transactions and isolation felt abstract until I imagined two buyers clicking seat A12 at once and wrote the SQL out step by step. A conditional UPDATE that only succeeds if the seat is still available, and a second request that updates zero rows, finally made locks, constraints and rollbacks click. Drawing timelines on paper and tracing both requests line by line helped far more than rereading definitions.
+
+Based on the feedback on my capstone, I would improve how I handle failure. My design explained the normal path well, but I spent too little time on what happens when something breaks: the cache goes down, a payment succeeds but the order update fails, or the database primary crashes. I would add a section on retries, idempotency, refunds and failover, and test each design choice by asking "what if this component disappears?" I would also back my estimates with clearer assumptions, so the reasoning behind each number is easy to follow.
+
+Next, I want to learn how distributed systems work in practice: replication, sharding, consensus, and message systems such as Kafka. I also want to build a small version of a ticketing system and load test it, to see for myself where the bottlenecks appear, and to learn how monitoring and alerting help teams find problems in production.
